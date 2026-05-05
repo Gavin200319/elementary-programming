@@ -16,34 +16,6 @@ func main() {
 	}
 }
 
-func reverse(s string) string {
-	r := []rune(s)
-	for i, j := 0, len(r)-1; i < j; i, j = i+1, j-1 {
-		r[i], r[j] = r[j], r[i]
-	}
-	return string(r)
-}
-
-func strCap(s string) string {
-	r := []rune(s)
-	inWord := false
-
-	for i := 0; i < len(r); i++ {
-		if isLetter(r[i]) {
-			if !inWord {
-				r[i] = toUpper(r[i])
-				inWord = true
-			} else {
-				r[i] = toLower(r[i])
-
-			}
-		} else {
-			inWord = false
-		}
-	}
-	return string(r)
-}
-
 func isLetter(c rune) bool {
 	return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
 }
@@ -60,5 +32,16 @@ func toLower(c rune) rune {
 	return c
 }
 func process(s string) string {
-	return reverse(strCap(s))
+	r:=[]rune(s)
+	for i:=0; i<len(r);i++{
+		r[i]= toLower(r[i])
+	}
+	for i:=0; i<len(r); i++{
+		if isLetter(r[i]){
+			if i+1 == len(r)|| !isLetter(r[i+1]){
+				r[i]= toUpper(r[i])
+			}
+		}
+	}
+	return string (r)
 }
